@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
       var sd = JSON.parse(JSON.stringify(data.data()));
 
       this.name = sd.name;
-      console.log('resulting', sd);
+      console.log('resul', sd);
     });
   }
 }
