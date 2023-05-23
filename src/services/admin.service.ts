@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from "rxjs/index";
 import { ApiResponse } from "../models/api.response";
-import { LoginRequest, ChangePasswordReq } from "../models/rsvp-request.model";
+import { LoginRequest } from "../models/rsvp-request.model";
 import { Admin } from "../models/rsvp.model";
 import { environment } from '../environments/environment';
 
@@ -33,9 +33,9 @@ export class AdminService {
     return this.http.post<ApiResponse>(this.baseUrl + '/Add', admin);
   }
 
-  ChangePasswordAdmin(changePasswordReq: ChangePasswordReq): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(this.baseUrl + '/ChangePassword', changePasswordReq);
-  }
+  // ChangePasswordAdmin(changePasswordReq: ChangePasswordReq): Observable<ApiResponse> {
+  //   return this.http.post<ApiResponse>(this.baseUrl + '/ChangePassword', changePasswordReq);
+  // }
 
 
 

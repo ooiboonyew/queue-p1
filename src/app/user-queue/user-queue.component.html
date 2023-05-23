@@ -1,1 +1,80 @@
-<p>user-queue works!</p>
+<div
+  class="container"
+  style="
+    padding-left: calc(var(--bs-gutter-x) * 2);
+    padding-right: calc(var(--bs-gutter-x) * 2);
+  "
+>
+  <div class="row" style="padding-top: 30px">
+    <div class="col-12">
+      <!-- <div style="font-size: xx-large">Check-in</div> -->
+      Current Queue
+    </div>
+  </div>
+  <div class="row" style="padding-top: 10px">
+    <div
+      class="col-6 text-center"
+      style="font-size: xx-large; font-weight: bold"
+    >
+      {{ rsvp?.runningQueue }}
+    </div>
+    <div class="col-6 text-end">
+      <button mat-icon-button style="color: #6c757d; width: 45px; height: 45px" (click)="refresh()">
+        <mat-icon style="padding-top: 3px">refresh</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div *ngIf="!myQueue">
+    <div class="row" style="padding-top: 20px">
+      <div class="col-6">Last Issue Queue</div>
+      <div
+        class="col-6 text-end"
+        style="font-size: xx-large; font-weight: bold"
+      >
+        {{ rsvp?.issuedQueue }}
+      </div>
+    </div>
+    <div class="row text-center" style="padding-top: 20px">
+      <div class="col-12">
+        <button
+          class="btn btn-warning"
+          style="width: 100%"
+          (click)="AddQueue()"
+        >
+          Get Queue Number
+        </button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="myQueue">
+    <div class="row" style="padding-top: 30px; color: deepskyblue">
+      <div class="col-12">
+        <i
+          >Please take screenshot of own queue number or don’t close this
+          browser to keep this Queue number.
+        </i>
+      </div>
+    </div>
+    <div class="row" style="padding-top: 30px">
+      <div class="col-12">
+        <!-- <div style="font-size: xx-large">Check-in</div> -->
+        Your Queue
+      </div>
+    </div>
+    <div class="row" style="padding-top: 10px">
+      <div
+        class="col-6 text-center"
+        style="font-size: xx-large; font-weight: bold"
+      >
+        {{ myQueue.issuedQueue }}
+      </div>
+    </div>
+    <div
+      class="row"
+      style="padding-top: 10px; color: red"
+      *ngIf="(rsvp?.runningQueueNumber - myQueue.issuedQueueNumber) <= 5"
+    >
+      Your Queue No. will be call soon, please kindly proceed to entrance.
+    </div>
+  </div>
+</div>

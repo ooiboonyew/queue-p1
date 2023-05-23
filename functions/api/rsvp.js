@@ -225,47 +225,6 @@ function isNumeric(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
-rsvpApp.post("/rsvp/import", async (req, res, next) => {
-  try {
-    var data = req.body.toString("utf8");
-    data = data.substring(data.indexOf("text/csv") + 8);
-    let csv = data.split("---")[0];
-    const csvData = await CSVToJSON().fromString(csv.trim());
-    console.log(csvData);
-
-    for (const rsvp of csvData) {
-      var rsvpData = {
-        firstName: rsvp.firstName,
-        lastName: rsvp.lastName,
-        email: rsvp.email.toLowerCase(),
-        category: rsvp.category,
-        company: rsvp.company,
-        data1: rsvp.data1,
-        data2: rsvp.data2,
-        data3: rsvp.data3,
-        data4: rsvp.data4,
-        data5: rsvp.data5,
-        qr: rsvp.qr,
-        checkedIn: false,
-        createdDate: new Date(),
-      };
-
-      var existStaff = await rsvpModel.checkEmail(rsvpData.email);
-
-      if (existStaff.id) {
-        rsvpData.id = existStaff.id;
-        const result = await rsvpModel.update(rsvpData);
-      } else {
-        const result = await rsvpModel.add(rsvpData);
-      }
-    }
-
-    return res.status(200).json("success");
-  } catch (error) {
-    adeErrorHandler(error, req, res, next);
-  }
-});
-
 rsvpApp.post("/admin/login", async (req, res, next) => {
   try {
     let email = req.body.email;
@@ -372,6 +331,64 @@ rsvpApp.post("/rsvp/checkin", async (req, res, next) => {
     const result = await rsvpModel.getRSVPById(rsvp.id);
     //send email
     return res.status(200).json(result);
+  } catch (error) {
+    adeErrorHandler(error, req, res, next);
+  }
+});
+
+rsvpApp.post("/rsvp/addRunningQueue", async (req, res, next) => {
+  try {
+    var prefix = await settingModel.getById("prefix");
+    var runningQueue = await rsvpModel.getRSVPById("runningQueue");
+    runningQueue.queueNumber += 1;
+    const resultId = await rsvpModel.update(runningQueue);
+    var result =
+      prefix.value + String(runningQueue.queueNumber).padStart(4, "0");
+
+    return res.status(200).json({
+      runningQueue: result,
+      runningQueueNumber: runningQueue.queueNumber,
+    });
+  } catch (error) {
+    adeErrorHandler(error, req, res, next);
+  }
+});
+
+rsvpApp.post("/rsvp/addIssuedQueue", async (req, res, next) => {
+  try {
+    var prefix = await settingModel.getById("prefix");
+    var issuedQueue = await rsvpModel.getRSVPById("issuedQueue");
+    issuedQueue.queueNumber += 1;
+    const resultId = await rsvpModel.update(issuedQueue);
+    var result =
+      prefix.value + String(issuedQueue.queueNumber).padStart(4, "0");
+
+    return res.status(200).json({
+      issuedQueue: result,
+      issuedQueueNumber: issuedQueue.queueNumber,
+    });
+  } catch (error) {
+    adeErrorHandler(error, req, res, next);
+  }
+});
+
+rsvpApp.get("/rsvp/GetQueue", async (req, res, next) => {
+  try {
+    var prefix = await settingModel.getById("prefix");
+    var runningQueue = await rsvpModel.getRSVPById("runningQueue");
+    var issuedQueue = await rsvpModel.getRSVPById("issuedQueue");
+
+    var strRunningQueue =
+      prefix.value + String(runningQueue.queueNumber).padStart(4, "0");
+    var strIssuedQueue =
+      prefix.value + String(issuedQueue.queueNumber).padStart(4, "0");
+
+    return res.status(200).json({
+      runningQueue: strRunningQueue,
+      issuedQueue: strIssuedQueue,
+      runningQueueNumber: runningQueue.queueNumber,
+      issuedQueueNumber: issuedQueue.queueNumber,
+    });
   } catch (error) {
     adeErrorHandler(error, req, res, next);
   }
