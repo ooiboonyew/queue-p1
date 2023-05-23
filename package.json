@@ -2,12 +2,18 @@
   "name": "new-app",
   "version": "0.0.0",
   "scripts": {
+    "g": "cd src && cd app && ng g component adminQueue --module app",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "deploy": "npm run build && firebase deploy"
+    "dev": "ng serve",
+    "local": "ng serve --prod",
+    "dev-back": "cd functions && firebase emulators:start --only functions",
+    "deploy": "npm run build && firebase deploy",
+    "deploy-front": "npm run build && firebase deploy --except functions",
+    "deploy-back": "firebase deploy --only functions"
   },
   "private": true,
   "dependencies": {
@@ -17,6 +23,7 @@
     "@angular/core": "^14.0.0",
     "@angular/fire": "^7.5.0",
     "@angular/forms": "^14.0.0",
+    "@angular/material": "^14.0.0",
     "@angular/platform-browser": "^14.0.0",
     "@angular/platform-browser-dynamic": "^14.0.0",
     "@angular/router": "^14.0.0",
