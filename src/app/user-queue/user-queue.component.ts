@@ -31,6 +31,11 @@ export class UserQueueComponent implements OnInit {
         this.rsvp = data;
         this.myQueue =  localStorage.getItem("myQueue") ? JSON.parse(localStorage.getItem("myQueue")) : {};
 
+        if(this.myQueue.issuedQueue[0] != this.rsvp.issuedQueue[0]){
+          this.myQueue = new RSVP();
+          localStorage.clear();
+        }
+
       },
       (err) => {
         var errorstr = JSON.stringify(err.error);

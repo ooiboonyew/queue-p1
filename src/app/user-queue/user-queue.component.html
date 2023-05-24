@@ -19,12 +19,16 @@
       {{ rsvp?.runningQueue }}
     </div>
     <div class="col-6 text-end">
-      <button mat-icon-button style="color: #6c757d" (click)="refresh()">
-        <mat-icon>refresh</mat-icon>
-      </button>
+      <button
+      mat-icon-button
+      style="color: #6c757d; "
+      (click)="refresh()"
+    >
+      <mat-icon>refresh</mat-icon>
+    </button>
     </div>
   </div>
-  <div *ngIf="!myQueue">
+  <div *ngIf="!myQueue.issuedQueue">
     <div class="row" style="padding-top: 20px">
       <div class="col-6">Last Issue Queue</div>
       <div
@@ -46,7 +50,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="myQueue">
+  <div *ngIf="myQueue.issuedQueue">
     <div class="row" style="padding-top: 30px; color: deepskyblue">
       <div class="col-12">
         <i
@@ -72,7 +76,7 @@
     <div
       class="row"
       style="padding-top: 10px; color: red"
-      *ngIf="rsvp?.runningQueueNumber - myQueue.issuedQueueNumber <= 5"
+      *ngIf="(myQueue.issuedQueueNumber - rsvp?.runningQueueNumber) <= 5"
     >
       Your Queue No. will be call soon, please kindly proceed to entrance.
     </div>
