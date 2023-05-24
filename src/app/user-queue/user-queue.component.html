@@ -19,8 +19,8 @@
       {{ rsvp?.runningQueue }}
     </div>
     <div class="col-6 text-end">
-      <button mat-icon-button style="color: #6c757d; width: 45px; height: 45px" (click)="refresh()">
-        <mat-icon style="padding-top: 3px">refresh</mat-icon>
+      <button mat-icon-button style="color: #6c757d" (click)="refresh()">
+        <mat-icon>refresh</mat-icon>
       </button>
     </div>
   </div>
@@ -72,7 +72,7 @@
     <div
       class="row"
       style="padding-top: 10px; color: red"
-      *ngIf="(rsvp?.runningQueueNumber - myQueue.issuedQueueNumber) <= 5"
+      *ngIf="rsvp?.runningQueueNumber - myQueue.issuedQueueNumber <= 5"
     >
       Your Queue No. will be call soon, please kindly proceed to entrance.
     </div>

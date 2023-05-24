@@ -1,1 +1,55 @@
-<p>admin-queue works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div style="font-size: xx-large">Manage Queue</div>
+    </div>
+  </div>
+  <div class="row" style="padding-top: 30px">
+    <div class="col-4">
+      <div>Current Queue</div>
+      <div class="row" style="padding-top: 10px">
+        <div class="col-12" style="font-size: xx-large; font-weight: bold">
+          <div style="color: #50C878	;">
+            {{ rsvp?.runningQueue }}
+          </div>
+          <div>
+            {{ rsvp?.nextRunningQueue }}
+          </div>
+          <div>
+            {{ rsvp?.next2RunningQueue }}
+          </div>
+          <!-- <div *ngFor='let in of counter(3) ;let i = index'>
+                {{ rsvp?.runningQueue }}
+            </div>
+           -->
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div>
+        Last Issue Queue
+        <button mat-icon-button style="color: #6c757d" (click)="refresh()">
+          <mat-icon>refresh</mat-icon>
+        </button>
+      </div>
+      <div class="row" style="padding-top: 10px">
+        <div class="col-12" style="font-size: xx-large; font-weight: bold">
+          <div>
+            {{ rsvp?.issuedQueue }}
+          </div>
+        </div>
+        <div class="col-12" style="padding-top: 20px;">
+          <div>
+            <button
+            class="btn btn-warning"
+            style="width: 200px"
+            (click)="AddQueue()"
+          >
+            Next Queue Number
+          </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

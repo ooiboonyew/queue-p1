@@ -380,11 +380,18 @@ rsvpApp.get("/rsvp/GetQueue", async (req, res, next) => {
 
     var strRunningQueue =
       prefix.value + String(runningQueue.queueNumber).padStart(4, "0");
+    var strNextRunningQueue =
+      prefix.value + String(runningQueue.queueNumber + 1).padStart(4, "0");
+    var strNext2RunningQueue =
+      prefix.value + String(runningQueue.queueNumber + 2).padStart(4, "0");
+      
     var strIssuedQueue =
       prefix.value + String(issuedQueue.queueNumber).padStart(4, "0");
 
     return res.status(200).json({
       runningQueue: strRunningQueue,
+      nextRunningQueue: strNextRunningQueue,
+      next2RunningQueue: strNext2RunningQueue,
       issuedQueue: strIssuedQueue,
       runningQueueNumber: runningQueue.queueNumber,
       issuedQueueNumber: issuedQueue.queueNumber,

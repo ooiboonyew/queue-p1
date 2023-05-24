@@ -63,8 +63,12 @@ export class Summary {
 export class RSVP {
   issuedQueue: string;
   runningQueue: string;
+  nextRunningQueue: string
+  next2RunningQueue: string
+  
   runningQueueNumber: number;
   issuedQueueNumber: number;
+  
   // selected: boolean;
   // id: string;
   // num: number;
