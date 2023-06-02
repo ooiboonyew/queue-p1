@@ -10,7 +10,12 @@
     padding-right: calc(var(--bs-gutter-x) * 2);
   "
 >
-  <div class="row" style="padding-top: 30px">
+<div class="row" style="padding-top: 30px">
+  <div class="col-12 text-end">
+    Day {{rsvp?.day}}
+  </div>
+</div>
+  <div class="row" style="padding-top: 20px">
     <div class="col-12">
       <!-- <div style="font-size: xx-large">Check-in</div> -->
       Current Queue
@@ -43,7 +48,7 @@
         {{ rsvp?.issuedQueue }}
       </div>
     </div>
-    <div class="row text-center" style="padding-top: 20px">
+    <div class="row text-center" style="padding-top: 30px">
       <div class="col-12">
         <button
           class="btn btn-warning"

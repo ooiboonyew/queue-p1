@@ -389,6 +389,7 @@ rsvpApp.get("/rsvp/GetQueue", async (req, res, next) => {
       prefix.value + String(issuedQueue.queueNumber).padStart(4, "0");
 
     return res.status(200).json({
+      day: prefix.day,
       runningQueue: strRunningQueue,
       nextRunningQueue: strNextRunningQueue,
       next2RunningQueue: strNext2RunningQueue,

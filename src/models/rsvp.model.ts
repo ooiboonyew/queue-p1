@@ -61,6 +61,7 @@ export class Summary {
 }
 
 export class RSVP {
+  day: string;
   issuedQueue: string;
   runningQueue: string;
   nextRunningQueue: string
