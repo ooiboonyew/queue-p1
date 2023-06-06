@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  Service_URL: 'http://localhost:6001/queue-15e64/asia-southeast1/rsvp',
+  Service_URL: 'https://asia-southeast1-queue-15e64.cloudfunctions.net/rsvp',
   firebase: {
     apiKey: "AIzaSyCG2DkxSPxZQEgYMC80jWIJg8MXZsCge0w",
     authDomain: "queue-15e64.firebaseapp.com",
